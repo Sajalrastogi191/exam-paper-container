@@ -1,0 +1,22 @@
+mern-exam-paper-repo/
+├── backend/
+│   ├── controllers/     # Request handlers
+│   ├── models/          # MongoDB schema models
+│   ├── routes/          # API routes
+│   ├── middleware/      # Custom middleware
+│   ├── config/          # Configuration files
+│   ├── uploads/         # Store uploaded files
+│   ├── server.js        # Express server entry point
+│   └── package.json     # Backend dependencies
+└── frontend/
+    ├── public/          # Static files
+    ├── src/
+    │   ├── components/  # Reusable components
+    │   ├── pages/       # Page components
+    │   ├── contexts/    # React contexts (auth, etc)
+    │   ├── hooks/       # Custom hooks
+    │   ├── services/    # API service calls
+    │   ├── utils/       # Utility functions
+    │   ├── App.js       # Main App component
+    │   └── index.js     # React entry point
+    └── package.json     # Frontend dependencies
