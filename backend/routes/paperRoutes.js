@@ -10,6 +10,7 @@ router.get("/filter-options", paperController.getFilterOptions)
 router.get("/:id", paperController.getPaperById)
 router.get("/:id/download", paperController.downloadPaper)
 
+
 // Protected routes
 router.post("/", protect, upload.single("file"), paperController.uploadPaper)
 router.get("/user/papers", protect, paperController.getUserPapers)

@@ -3,16 +3,19 @@ const Solution = require("../models/Solution")
 const fs = require("fs")
 const path = require("path")
 
+
 // Get all papers with filtering
 exports.getPapers = async (req, res) => {
   try {
-    const { subject, semester, year, search } = req.query
+    const { subject, semester, year, search, subjectCode} = req.query
 
     // Build filter object
     const filter = {}
     if (subject) filter.subject = subject
     if (semester) filter.semester = semester
     if (year) filter.year = year
+    if (subjectCode) filter.subjectCode = subjectCode
+
 
     // Add text search if provided
     if (search) {
@@ -77,7 +80,7 @@ exports.uploadPaper = async (req, res) => {
       return res.status(400).json({ message: "Please upload a file" })
     }
 
-    const { title, subject, semester, year, description } = req.body
+    const { title, subject, semester, year, description, subjectCode } = req.body
 
     // Create new paper
     const paper = new Paper({
@@ -86,6 +89,7 @@ exports.uploadPaper = async (req, res) => {
       semester,
       year,
       description,
+      subjectCode,
       fileUrl: `/uploads/${req.file.filename}`,
       fileName: req.file.originalname,
       author: req.user.id,
@@ -110,11 +114,9 @@ exports.downloadPaper = async (req, res) => {
     }
 
     const filePath = path.join(__dirname, "..", paper.fileUrl)
-
     if (!fs.existsSync(filePath)) {
       return res.status(404).json({ message: "File not found" })
     }
-
     res.download(filePath, paper.fileName)
   } catch (error) {
     console.error(error)
@@ -139,11 +141,12 @@ exports.getFilterOptions = async (req, res) => {
     const subjects = await Paper.distinct("subject")
     const semesters = await Paper.distinct("semester")
     const years = await Paper.distinct("year")
-
+    const subjectCodes = await Paper.distinct("subjectCode")
     res.json({
       subjects,
       semesters,
       years,
+      subjectCodes,
     })
   } catch (error) {
     console.error(error)

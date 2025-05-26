@@ -11,6 +11,7 @@ const PapersPage = () => {
     subjects: [],
     semesters: [],
     years: [],
+    subjectCodes: [],
   })
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState("")
@@ -19,6 +20,7 @@ const PapersPage = () => {
   const [searchQuery, setSearchQuery] = useState("")
   const [subjectFilter, setSubjectFilter] = useState("")
   const [semesterFilter, setSemesterFilter] = useState("")
+  const [subjectCodeFilter, setSubjectCodeFilter] = useState("")
   const [yearFilter, setYearFilter] = useState("")
   const [showFilters, setShowFilters] = useState(false)
 
@@ -37,6 +39,7 @@ const PapersPage = () => {
           subject: subjectFilter,
           semester: semesterFilter,
           year: yearFilter,
+          subjectCode: subjectCodeFilter,
         }
 
         const response = await paperService.getPapers(filters)
@@ -50,7 +53,7 @@ const PapersPage = () => {
     }
 
     fetchPapers()
-  }, [searchQuery, subjectFilter, semesterFilter, yearFilter])
+  }, [searchQuery, subjectFilter, semesterFilter, yearFilter, subjectCodeFilter])
 
   const handleSearchSubmit = (e) => {
     e.preventDefault()
@@ -122,7 +125,7 @@ const PapersPage = () => {
                   value={subjectFilter}
                   onChange={(e) => setSubjectFilter(e.target.value)}
                 >
-                  <option value="">All Subjects</option>
+                  <option value="">All Subject</option>
                   {filterOptions.subjects.map((subject) => (
                     <option key={subject} value={subject}>
                       {subject}
@@ -145,6 +148,26 @@ const PapersPage = () => {
                   {filterOptions.semesters.map((semester) => (
                     <option key={semester} value={semester}>
                       {semester}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+
+              <div>
+                <label htmlFor="subject-code-filter" className="block text-sm font-medium text-gray-700">
+                  Subject Code
+                </label>
+                <select
+                  id="subject-code-filter"
+                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                  value={subjectCodeFilter}
+                  onChange={(e) => setSubjectCodeFilter(e.target.value)}
+                >
+                  <option value="">All Subject Codes</option>
+                  {filterOptions.subjectCodes.map((code) => (
+                    <option key={code} value={code}>
+                      {code}
                     </option>
                   ))}
                 </select>
@@ -195,7 +218,7 @@ const PapersPage = () => {
                   <span className="absolute inset-0" aria-hidden="true"></span>
                   <h3 className="text-lg font-medium text-gray-900">{paper.title}</h3>
                   <p className="text-sm text-gray-500">
-                    {paper.subject} • {paper.semester} {paper.year}
+                    {paper.subject} • {paper.semester} {paper.year} {paper.subjectCode}
                   </p>
                 </Link>
               </div>

@@ -2,9 +2,10 @@
 
 import { useState, useEffect } from "react"
 import { useParams, Link } from "react-router-dom"
-import { paperService, solutionService } from "../services/api"
+import { paperService, solutionService} from "../services/api"
 import { useAuth } from "../contexts/AuthContext"
 import Spinner from "../components/common/Spinner"
+
 
 const PaperDetailPage = () => {
   const { id } = useParams()
@@ -164,6 +165,17 @@ const PaperDetailPage = () => {
                 Download
               </button>
             </div>
+            {/* paper view container */}
+            {/*<div className="pdf-viewer-container relative h-[600px] w-full overflow-hidden rounded-lg border border-gray-200">
+              <iframe 
+                src={`${API_URL}/papers/${id}/download`}
+                className="absolute inset-0 h-full w-full border-0"
+                title={`${paper.title} PDF Viewer`}
+                loading="lazy"
+              />
+            </div>*/}
+            {/* paper view container ends */}
+
             <div className="border-t border-gray-200">
               <dl>
                 {paper.description && (
@@ -181,6 +193,18 @@ const PaperDetailPage = () => {
                 <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                   <dt className="text-sm font-medium text-gray-500">File name</dt>
                   <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{paper.fileName}</dd>
+                </div>
+                <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <dt className="text-sm font-medium text-gray-500">Subject Code</dt>
+                  <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{paper.subjectCode}</dd>
+                </div>
+                <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <dt className="text-sm font-medium text-gray-500">Semester</dt>
+                  <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{paper.semester}</dd>
+                </div>
+                <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <dt className="text-sm font-medium text-gray-500">Year</dt>
+                  <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{paper.year}</dd>
                 </div>
               </dl>
             </div>
@@ -419,4 +443,4 @@ const PaperDetailPage = () => {
   )
 }
 
-export default PaperDetailPage
+export default PaperDetailPage;

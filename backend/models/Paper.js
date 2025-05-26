@@ -42,6 +42,11 @@ const PaperSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  subjectCode: {
+    type: String,
+    required: true,
+    trim: true,
+  },
 })
 
 // Add text index for search functionality

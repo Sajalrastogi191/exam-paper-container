@@ -12,11 +12,13 @@ const UploadPage = () => {
   const [semester, setSemester] = useState("")
   const [year, setYear] = useState("")
   const [description, setDescription] = useState("")
+  const [subjectCode, setSubjectCode] = useState("")
   const [file, setFile] = useState(null)
   const [filterOptions, setFilterOptions] = useState({
     subjects: [],
     semesters: [],
     years: [],
+    subjectCode: [],
   })
   const [loading, setLoading] = useState(true)
   const [uploading, setUploading] = useState(false)
@@ -64,6 +66,7 @@ const UploadPage = () => {
         year,
         description,
         file,
+        subjectCode,
       }
 
       const response = await paperService.uploadPaper(paperData)
@@ -144,21 +147,15 @@ const UploadPage = () => {
                       Subject
                     </label>
                     <div className="mt-1">
-                      <select
+                      <input
+                        type="text"
                         id="subject"
                         className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                        placeholder="e.g., Data Structures"
                         value={subject}
                         onChange={(e) => setSubject(e.target.value)}
                         required
-                      >
-                        <option value="">Select Subject</option>
-                        {filterOptions.subjects.map((subj) => (
-                          <option key={subj} value={subj}>
-                            {subj}
-                          </option>
-                        ))}
-                        <option value="other">Other</option>
-                      </select>
+                      />
                     </div>
                   </div>
 
@@ -167,21 +164,32 @@ const UploadPage = () => {
                       Semester
                     </label>
                     <div className="mt-1">
-                      <select
+                      <input
+                        type="text"
                         id="semester"
                         className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                        placeholder="e.g., 5"
                         value={semester}
                         onChange={(e) => setSemester(e.target.value)}
                         required
-                      >
-                        <option value="">Select Semester</option>
-                        {filterOptions.semesters.map((sem) => (
-                          <option key={sem} value={sem}>
-                            {sem}
-                          </option>
-                        ))}
-                        <option value="other">Other</option>
-                      </select>
+                      />
+                    </div>
+                  </div>
+
+                  <div className="col-span-3 sm:col-span-1">
+                    <label htmlFor="subjectCode" className="block text-sm font-medium text-gray-700">
+                      SubjectCode
+                    </label>
+                    <div className="mt-1">
+                      <input
+                        type="text"
+                        id="subjectCode"
+                        className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                        placeholder="e.g., CS301"
+                        value={subjectCode}
+                        onChange={(e) => setSubjectCode(e.target.value)}
+                        required
+                      />
                     </div>
                   </div>
 
@@ -190,21 +198,15 @@ const UploadPage = () => {
                       Year
                     </label>
                     <div className="mt-1">
-                      <select
+                      <input
+                        type="text"
                         id="year"
                         className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                        placeholder="e.g., 2024"
                         value={year}
                         onChange={(e) => setYear(e.target.value)}
                         required
-                      >
-                        <option value="">Select Year</option>
-                        {filterOptions.years.map((yr) => (
-                          <option key={yr} value={yr}>
-                            {yr}
-                          </option>
-                        ))}
-                        <option value={new Date().getFullYear().toString()}>{new Date().getFullYear()}</option>
-                      </select>
+                      />
                     </div>
                   </div>
                 </div>
