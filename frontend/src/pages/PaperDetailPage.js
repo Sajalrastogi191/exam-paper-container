@@ -168,7 +168,7 @@ const PaperDetailPage = () => {
             {/* paper view container */}
             {/*<div className="pdf-viewer-container relative h-[600px] w-full overflow-hidden rounded-lg border border-gray-200">
               <iframe 
-                src={`${API_URL}/papers/${id}/download`}
+                src={`http://localhost:3000/papers/68271182a017c0e6a0db78ba`}
                 className="absolute inset-0 h-full w-full border-0"
                 title={`${paper.title} PDF Viewer`}
                 loading="lazy"
