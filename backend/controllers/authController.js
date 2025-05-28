@@ -98,10 +98,10 @@ exports.getCurrentUser = async (req, res) => {
 // Update user profile
 exports.updateProfile = async (req, res) => {
   try {
-    const { name, email, bio } = req.body
+    const { name, email, bio, avatar} = req.body
 
     // Find user and update
-    const updatedUser = await User.findByIdAndUpdate(req.user.id, { name, email, bio }, { new: true }).select(
+    const updatedUser = await User.findByIdAndUpdate(req.user.id, { name, email, bio, avatar}, { new: true }).select(
       "-password",
     )
 
